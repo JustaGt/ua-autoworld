@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>U&amp;A Autoworld Sample</title>
+<meta name="description" content="European car repair in Olathe, KS. Free second opinions, digital inspections with photos, and honest prices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: shop floor at night. Logo red on blacked out steel, one wide column, a live inspection report as the centerpiece. */
+:root{
+--bg:#0b0b0c;
+--panel:#151517;
+--panel-2:#1d1d20;
+--line:#2b2b30;
+--fg:#f2f2f3;
+--muted:#a2a3aa;
+--steel:#c4c7cd;
+--red:#d0121b;
+--red-deep:#9b0c13;
+--ok:#3fbf6e;
+--soon:#e8a33a;
+--font-display:"Saira Condensed","Arial Narrow",Impact,sans-serif;
+--font-body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+--font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--font-display);font-weight:800;line-height:1;letter-spacing:.005em;text-wrap:balance;margin:0}
+h2{font-size:clamp(2.1rem,5vw,3.2rem);font-style:italic;text-transform:uppercase}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+.eyebrow b{color:var(--red);font-weight:500}
+.lede{color:var(--muted);max-width:60ch;margin:14px 0 0}
+section{padding-block:clamp(64px,9vw,104px)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;padding:13px 22px;border-radius:6px;border:1px solid transparent;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep)}
+.btn-ghost{border-color:var(--line);color:var(--fg);background:transparent}
+.btn-ghost:hover{border-color:var(--steel)}
+.btn svg{width:18px;height:18px;flex:none}
+/* concept ribbon */
+.ribbon{background:var(--steel);color:#111;font-size:.82rem;text-align:center;padding:8px 16px;font-weight:500}
+.ribbon b{font-weight:700}
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:70px}
+.brand img{height:60px;width:auto}
+.top nav{display:flex;gap:26px;font-size:.92rem;color:var(--muted)}
+.top nav a{text-decoration:none}
+.top nav a:hover{color:var(--fg)}
+.top .call{font-family:var(--font-mono);font-size:.95rem;text-decoration:none;display:flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--line);border-radius:6px;white-space:nowrap}
+.top .call:hover{border-color:var(--red)}
+.top .call svg{width:16px;height:16px;color:var(--red)}
+@media (max-width:860px){.top nav{display:none}}
+@media (max-width:420px){.top .call span{display:none}.brand img{height:52px}}
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:clamp(56px,8vw,96px) clamp(48px,7vw,80px);border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;background:
+radial-gradient(60% 70% at 85% 30%,rgba(208,18,27,.22),transparent 70%),
+repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,255,255,.025) 46px 47px);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(3rem,8.4vw,6.4rem);font-style:italic;text-transform:uppercase;line-height:.92}
+.hero h1 em{color:var(--red);font-style:italic}
+.hero .lede{font-size:1.12rem;color:#c9cad0;margin-top:22px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.85rem;color:var(--steel);margin-bottom:22px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--panel)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.status.open .dot{background:var(--ok);box-shadow:0 0 0 4px rgba(63,191,110,.18)}
+.status.closed .dot{background:var(--red)}
+.spec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;font-family:var(--font-mono);font-size:.86rem}
+.spec h3{font-family:var(--font-mono);font-style:normal;font-weight:500;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin-bottom:12px}
+.spec dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 16px}
+.spec dt{color:var(--muted)}
+.spec dd{margin:0;text-align:right;color:var(--fg)}
+.spec .free{color:var(--ok)}
+.spec hr{border:0;border-top:1px dashed var(--line);margin:16px 0}
+.stars{color:#f5c542;letter-spacing:2px}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+/* makes */
+.makes{padding-block:26px;border-bottom:1px solid var(--line);background:var(--panel)}
+.makes .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:14px 34px;justify-content:space-between}
+.makes .label{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.makes ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 26px}
+.makes li{font-family:var(--font-display);font-weight:700;font-size:1.35rem;letter-spacing:.06em;text-transform:uppercase;color:var(--steel)}
+/* services */
+.svc-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:40px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.svc{background:var(--bg);padding:28px 26px 30px;display:flex;flex-direction:column;gap:10px;min-width:0;transition:background .2s}
+.svc:hover{background:var(--panel)}
+.svc .code{font-family:var(--font-mono);font-size:.74rem;color:var(--red);letter-spacing:.1em}
+.svc h3{font-size:1.65rem;font-style:italic;text-transform:uppercase}
+.svc p{margin:0;color:var(--muted);font-size:.95rem}
+.svc .tag{align-self:flex-start;margin-top:auto;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:4px;background:rgba(63,191,110,.12);color:var(--ok)}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+/* inspection */
+.inspect{background:linear-gradient(180deg,var(--bg),var(--panel) 30%,var(--panel));border-block:1px solid var(--line)}
+.inspect .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.steps{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:18px}
+.steps li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.steps .n{font-family:var(--font-display);font-weight:800;font-style:italic;font-size:1.6rem;color:var(--red);line-height:1.1}
+.steps strong{display:block;font-weight:600}
+.steps span{color:var(--muted);font-size:.95rem}
+blockquote.pull{margin:30px 0 0;padding:0 0 0 18px;border-left:3px solid var(--red);color:#d6d7dc;font-style:italic}
+blockquote.pull cite{display:block;margin-top:8px;font-style:normal;font-family:var(--font-mono);font-size:.78rem;color:var(--muted)}
+.phone{justify-self:center;width:100%;max-width:380px;background:#050506;border:1px solid var(--line);border-radius:34px;padding:14px;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.screen{background:var(--panel-2);border-radius:24px;overflow:hidden}
+.screen .bar{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
+.screen .bar .eyebrow{font-size:.68rem}
+.screen .bar h4{margin:4px 0 0;font-family:var(--font-body);font-size:1.02rem;font-weight:600}
+.screen .bar small{color:var(--muted);font-family:var(--font-mono);font-size:.72rem}
+.item{padding:14px 18px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.item .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.item .name{font-weight:600;font-size:.94rem}
+.item .note{color:var(--muted);font-size:.8rem;font-family:var(--font-mono)}
+.pill{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.pill.urgent{background:rgba(208,18,27,.18);color:#ff6b72}
+.pill.soon{background:rgba(232,163,58,.16);color:var(--soon)}
+.pill.good{background:rgba(63,191,110,.14);color:var(--ok)}
+.choice{display:flex;gap:8px}
+.choice button{flex:1;font:inherit;font-size:.8rem;font-weight:600;padding:7px 0;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.choice button[aria-pressed="true"].yes{background:var(--ok);border-color:var(--ok);color:#06210f}
+.choice button[aria-pressed="true"].no{background:var(--panel);border-color:var(--steel);color:var(--fg)}
+.total{padding:14px 18px 18px;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.85rem}
+.total b{font-size:1.1rem;color:var(--fg)}
+@media (max-width:900px){.inspect .wrap{grid-template-columns:1fr}}
+/* reviews */
+.rev-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:36px}
+.score{display:flex;align-items:center;gap:16px}
+.score .big{font-family:var(--font-display);font-weight:800;font-size:4rem;line-height:1;font-style:italic}
+.score small{display:block;color:var(--muted);font-size:.85rem}
+.reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.review{border-top:2px solid var(--red);padding-top:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.review p{margin:0;color:#d6d7dc}
+.review footer{margin-top:auto;font-family:var(--font-mono);font-size:.78rem;color:var(--muted)}
+@media (max-width:900px){.reviews{grid-template-columns:1fr}}
+/* request + visit */
+.contact{border-top:1px solid var(--line)}
+.contact .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.field{display:grid;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+label{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--red)}
+textarea{min-height:110px;resize:vertical}
+.form-foot{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.form-foot small{color:var(--muted)}
+.sent{grid-column:1/-1;background:rgba(63,191,110,.1);border:1px solid rgba(63,191,110,.35);color:#bfeccf;padding:14px 16px;border-radius:6px;font-size:.95rem}
+.visit{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:28px;align-self:start}
+.visit h3{font-size:1.9rem;font-style:italic;text-transform:uppercase}
+.visit address{font-style:normal;margin-top:12px;color:#d6d7dc}
+.hours{width:100%;border-collapse:collapse;margin-top:20px;font-family:var(--font-mono);font-size:.88rem;font-variant-numeric:tabular-nums}
+.hours td{padding:8px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right}
+.hours tr.today td{color:var(--fg);font-weight:500}
+.hours tr.today td:first-child::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-right:8px;vertical-align:middle}
+.hours td{color:var(--muted)}
+.visit .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.visit .links .btn{font-size:1rem;padding:10px 16px}
+@media (max-width:900px){.contact .wrap{grid-template-columns:1fr}}
+@media (max-width:520px){form{grid-template-columns:1fr}}
+footer.site{border-top:1px solid var(--line);padding-block:34px;color:var(--muted);font-size:.85rem}
+footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+footer.site img{height:40px;width:auto}
+/* sticky mobile call bar */
+.mbar{display:none}
+@media (max-width:640px){
+.mbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.mbar .btn{justify-content:center;font-size:1.05rem;padding:12px}
+body{padding-bottom:76px}
+}
+</style>
+</head>
+<body>
+<div class="ribbon"><b>Sample design</b> made for U&amp;A Autoworld by Onyx Rise Media. Not the live site.</div>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="#top" aria-label="U&amp;A Autoworld home"><img src="https://uandaautoworld.com/wp-content/uploads/2025/11/cropped-background-transparent-UA-AUTOWORLD-LOGO-scaled-1.png" alt="U&amp;A Autoworld Repair Auto Shop"></a>
+<nav aria-label="Main">
+<a href="#services">Services</a>
+<a href="#inspection">How it works</a>
+<a href="#reviews">Reviews</a>
+<a href="#visit">Hours &amp; location</a>
+</nav>
+<a class="call" href="tel:+19132224495"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span>(913) 222 4495</span></a>
+</div>
+</header>
+<main id="top">
+<section class="hero">
+<div class="wrap">
+<div>
+<div class="status" id="status"><span class="dot"></span><span id="status-text">Mon to Fri 8 to 6, Sat 9 to 4</span></div>
+<h1>European car repair in <em>Olathe</em></h1>
+<p class="lede">Audi, BMW, Mercedes, Porsche and VW owners get dealer level know how without dealer prices. Family owned, honest quotes, and you approve every repair before we touch it.</p>
+<div class="ctas">
+<a class="btn btn-red" href="#request">Request service
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="btn btn-ghost" href="tel:+19132224495">Call (913) 222 4495</a>
+</div>
+</div>
+<aside class="spec" aria-label="Shop at a glance">
+<h3>Shop sheet</h3>
+<dl>
+<dt>Second opinion</dt><dd class="free">Free</dd>
+<dt>Check engine code read</dt><dd class="free">Free</dd>
+<dt>Inspection report</dt><dd>Photos by text</dd>
+<dt>Transmissions</dt><dd>Auto + manual</dd>
+<dt>Saturday hours</dt><dd>9 AM to 4 PM</dd>
+</dl>
+<hr>
+<dl>
+<dt>Google rating</dt><dd><span class="stars" aria-hidden="true">★★★★★</span> 5.0</dd>
+<dt>Location</dt><dd>S Strang Line Rd</dd>
+</dl>
+</aside>
+</div>
+</section>
+<div class="makes">
+<div class="wrap">
+<span class="label">We specialize in</span>
+<ul>
+<li>Audi</li><li>BMW</li><li>Mercedes</li><li>Porsche</li><li>Volkswagen</li><li>MINI</li><li>Land Rover</li><li>Jaguar</li>
+</ul>
+</div>
+</div>
+<section id="services">
+<div class="wrap">
+<div class="svc-head">
+<div>
+<p class="eyebrow"><b>01</b> &nbsp;What we fix</p>
+<h2>Committed to quality</h2>
+</div>
+<p class="lede" style="margin:0">European cars are our focus, and we work on domestic and Asian makes too. Not sure what's wrong? Start with the free check.</p>
+</div>
+<div class="grid">
+<article class="svc">
+<span class="code">CHECK ENGINE / P0XXX</span>
+<h3>Free inspection</h3>
+<p>Got a quote somewhere else that felt high? Bring it in for a free second opinion and a complimentary code check.</p>
+<span class="tag">No charge</span>
+</article>
+<article class="svc">
+<span class="code">ENGINE + ELECTRICAL</span>
+<h3>Tune ups &amp; repairs</h3>
+<p>Tune ups, starters, alternators and water pumps. The everyday jobs that keep you on the road, done right the first time.</p>
+</article>
+<article class="svc">
+<span class="code">CLIMATE</span>
+<h3>AC &amp; heating</h3>
+<p>Weak AC in July or no heat in January. We diagnose and repair both systems so the cabin stays comfortable year round.</p>
+</article>
+<article class="svc">
+<span class="code">DRIVETRAIN</span>
+<h3>Transmission</h3>
+<p>Automatic and manual transmission service, from fluid changes to slipping, hard shifts and warning lights.</p>
+</article>
+<article class="svc">
+<span class="code">DIAGNOSTICS</span>
+<h3>Warning lights</h3>
+<p>European cars throw a lot of codes. We use advanced diagnostic tools to find the real cause, not just clear the light.</p>
+</article>
+<article class="svc">
+<span class="code">MAINTENANCE</span>
+<h3>Routine service</h3>
+<p>Oil, brakes, filters and fluids on your schedule, so small things never turn into big bills.</p>
+</article>
+</div>
+</div>
+</section>
+<section class="inspect" id="inspection">
+<div class="wrap">
+<div>
+<p class="eyebrow"><b>02</b> &nbsp;How it works</p>
+<h2>You see what we see</h2>
+<p class="lede">No guessing and no pressure. Every car gets a digital inspection sent straight to your phone.</p>
+<ol class="steps">
+<li><span class="n">1</span><div><strong>We inspect and photograph</strong><span>Benjamin checks your car and takes photos of anything that needs attention.</span></div></li>
+<li><span class="n">2</span><div><strong>You get a text</strong><span>Items are sorted into urgent, can wait, and good, each with a price.</span></div></li>
+<li><span class="n">3</span><div><strong>You decide</strong><span>Approve or decline each item. We only do the work you say yes to.</span></div></li>
+</ol>
+<blockquote class="pull">“I felt very confident that what he found in the inspection was real and he was not trying to make me do all the repairs, so was all my decision.”<cite>Vanessa Zavala, Google review</cite></blockquote>
+</div>
+<div class="phone" aria-label="Example inspection report">
+<div class="screen">
+<div class="bar">
+<span class="eyebrow">Example report · try it</span>
+<h4>2017 BMW 330i inspection</h4>
+<small>From U&amp;A Autoworld · 7 photos</small>
+</div>
+<div class="item" data-price="340">
+<div class="row"><span class="name">Front brake pads &amp; rotors</span><span class="pill urgent">Urgent</span></div>
+<span class="note">Pads at 2 mm · $340</span>
+<div class="choice"><button type="button" class="yes" aria-pressed="true">Approve</button><button type="button" class="no" aria-pressed="false">Decline</button></div>
+</div>
+<div class="item" data-price="185">
+<div class="row"><span class="name">Valve cover gasket leak</span><span class="pill soon">Can wait</span></div>
+<span class="note">Light seep, monitor · $185</span>
+<div class="choice"><button type="button" class="yes" aria-pressed="false">Approve</button><button type="button" class="no" aria-pressed="true">Decline</button></div>
+</div>
+<div class="item" data-price="0">
+<div class="row"><span class="name">Tires, battery, coolant</span><span class="pill good">Good</span></div>
+<span class="note">Tread 7/32 · battery tested OK</span>
+</div>
+<div class="total"><span>Approved total</span><b id="total">$340</b></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reviews">
+<div class="wrap">
+<div class="rev-head">
+<div>
+<p class="eyebrow"><b>03</b> &nbsp;What drivers say</p>
+<h2>Honest mechanics exist</h2>
+</div>
+<div class="score">
+<span class="big">5.0</span>
+<div><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><small>24 Google reviews</small></div>
+</div>
+</div>
+<div class="reviews">
+<article class="review">
+<p>“These days it seems tough to find an honest mechanic, and I am so happy to have found one here at U&amp;A! Had an issue with my A/C on my Honda and Ben went above and beyond to make sure we were fixed and taken care of.”</p>
+<footer>Joel Sipp · Google</footer>
+</article>
+<article class="review">
+<p>“Needed service pretty quickly on a Saturday and they were able to get me in and fixed that day. Solid customer service.”</p>
+<footer>Ethan Lavallee · Google</footer>
+</article>
+<article class="review">
+<p>“Benjamin technical expertise was evident as he efficiently diagnosed and fixed the issue with my vehicle... To top it all off, they provided a complimentary cleaning service for my vehicle.”</p>
+<footer>Julie DeMore · Google</footer>
+</article>
+</div>
+</div>
+</section>
+<section class="contact" id="request">
+<div class="wrap">
+<div>
+<p class="eyebrow"><b>04</b> &nbsp;Get on the schedule</p>
+<h2>Tell us about your car</h2>
+<p class="lede">Send the car and the problem. We'll text you back with next steps, usually the same day.</p>
+<form id="req" novalidate>
+<div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
+<div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required></div>
+<div class="field"><label for="f-car">Year, make, model</label><input id="f-car" name="car" placeholder="2018 Audi Q5"></div>
+<div class="field"><label for="f-svc">Service</label>
+<select id="f-svc" name="service">
+<option>Free inspection / second opinion</option>
+<option>Check engine light</option>
+<option>Brakes</option>
+<option>AC or heating</option>
+<option>Transmission</option>
+<option>Routine maintenance</option>
+<option>Something else</option>
+</select></div>
+<div class="field full"><label for="f-msg">What's going on?</label><textarea id="f-msg" name="message" placeholder="Grinding noise when braking, started last week"></textarea></div>
+<div class="form-foot">
+<button class="btn btn-red" type="submit">Send request</button>
+<small>Prefer to pick a time? <a href="https://booking.shopgenie.io/?shop=ua-autoworld-2855956166&amp;preselect_account=ua-autoworld-2855957214" target="_blank" rel="noopener">Book online</a></small>
+</div>
+<div class="sent" id="sent" hidden>Sample only. On the live site this request goes straight to the shop's phone and inbox.</div>
+</form>
+</div>
+<aside class="visit" id="visit">
+<h3>Visit the shop</h3>
+<address>11507 S Strang Line Rd, Suite D<br>Olathe, KS 66062</address>
+<table class="hours" aria-label="Hours">
+<tbody id="hours">
+<tr data-d="1"><td>Monday</td><td>8 AM to 6 PM</td></tr>
+<tr data-d="2"><td>Tuesday</td><td>8 AM to 6 PM</td></tr>
+<tr data-d="3"><td>Wednesday</td><td>8 AM to 6 PM</td></tr>
+<tr data-d="4"><td>Thursday</td><td>8 AM to 6 PM</td></tr>
+<tr data-d="5"><td>Friday</td><td>8 AM to 6 PM</td></tr>
+<tr data-d="6"><td>Saturday</td><td>9 AM to 4 PM</td></tr>
+<tr data-d="0"><td>Sunday</td><td>Closed</td></tr>
+</tbody>
+</table>
+<div class="links">
+<a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=11507+S+Strang+Line+Rd+Suite+D+Olathe+KS+66062" target="_blank" rel="noopener">Directions</a>
+<a class="btn btn-ghost" href="tel:+19132224495">(913) 222 4495</a>
+</div>
+</aside>
+</div>
+</section>
+</main>
+<footer class="site">
+<div class="wrap">
+<img src="https://uandaautoworld.com/wp-content/uploads/2025/11/cropped-background-transparent-UA-AUTOWORLD-LOGO-scaled-1.png" alt="U&amp;A Autoworld">
+<span>Family owned in Olathe since 2024 · <a href="https://www.instagram.com/uanda.autoworld/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/people/UA-Autoworld/61563918391023/" target="_blank" rel="noopener">Facebook</a></span>
+<span>Sample by Onyx Rise Media</span>
+</div>
+</footer>
+<div class="mbar">
+<a class="btn btn-red" href="tel:+19132224495">Call now</a>
+<a class="btn btn-ghost" href="#request">Request service</a>
+</div>
+<script>
+(function(){
+// open / closed status in shop's time zone (Central)
+var hours={1:[8,18],2:[8,18],3:[8,18],4:[8,18],5:[8,18],6:[9,16],0:null};
+var names=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+function fmt(h){var s=h>=12?'PM':'AM';var x=h%12||12;return x+' '+s}
+try{
+var parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',weekday:'short',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(new Date());
+var get=function(t){var p=parts.find(function(x){return x.type===t});return p?p.value:''};
+var day=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(get('weekday'));
+var h=parseInt(get('hour'),10)%24+parseInt(get('minute'),10)/60;
+var row=document.querySelector('#hours tr[data-d="'+day+'"]');if(row)row.classList.add('today');
+var st=document.getElementById('status'),tx=document.getElementById('status-text');
+var today=hours[day];
+if(today&&h>=today[0]&&h<today[1]){st.classList.add('open');tx.textContent='Open now · closes '+fmt(today[1])}
+else{
+st.classList.add('closed');
+var d=day,n=0,next=null;
+if(today&&h<today[0]){next={d:day,h:today[0]}}
+while(!next&&n<7){d=(d+1)%7;n++;if(hours[d])next={d:d,h:hours[d][0]}}
+tx.textContent='Closed · opens '+(next.d===day?'today':(next.d===(day+1)%7?'tomorrow':names[next.d]))+' at '+fmt(next.h);
+}
+}catch(e){}
+// inspection approve / decline
+var items=document.querySelectorAll('.item[data-price]');
+function total(){var t=0;items.forEach(function(it){var y=it.querySelector('.yes');if(y&&y.getAttribute('aria-pressed')==='true')t+=+it.dataset.price});document.getElementById('total').textContent='$'+t}
+items.forEach(function(it){
+it.querySelectorAll('.choice button').forEach(function(b){
+b.addEventListener('click',function(){
+it.querySelectorAll('.choice button').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false')});
+total();
+});
+});
+});
+// sample form
+document.getElementById('req').addEventListener('submit',function(e){e.preventDefault();document.getElementById('sent').hidden=false});
+})();
+</script>
+</body>
+</html>
